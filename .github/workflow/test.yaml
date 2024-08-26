@@ -1,0 +1,16 @@
+on: [push]
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: A job to test crane action
+    steps:
+      - uses: actions/checkout@v4
+      - id: crane-setup
+        uses: comdotlinux/crane@latest
+        with:
+          version: 'latest'
+      - run: $CRANE --help
+        shell: bash
+        env:
+          CRANE: ${{ steps.fcrane-setup.outputs.crane }}

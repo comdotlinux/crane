@@ -1,0 +1,44 @@
+name: 'Setup Crane'
+description: 'Setup go-containerregistry either from cache or by downloading'
+inputs:
+  version:
+    description: 'Which version to install / set-up'
+    required: true
+    default: 'latest'
+outputs:
+  crane-path:
+    description: "The Path where the crane cli is installed to use in further steps"
+    value: ${{ steps.crane.outputs.the-path }}
+runs:
+  using: "composite"
+  steps:
+    - name: 'Check Which Version we should use'
+      id: which
+      run: |
+        if [[ "x${{}}" = "xlatest" ]]; then
+          export latestVersion=$(gh release list --repo google/go-containerregistry --limit 1 --json name --jq '.[].name')
+        else
+          export latestVersion=${{ inputs.version }}
+        fi
+        echo "version=$latestVersion" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: 'Download go-containerregistry'
+      run: |
+        curl -sL "https://github.com/google/go-containerregistry/releases/download/${VERSION}/go-containerregistry_${OS}_${ARCH}.tar.gz" > go-containerregistry.tar.gz
+        tar -zxvf go-containerregistry.tar.gz -C ${{ runner.temp }}/crane
+        chmod u+x ${{ runner.temp }}/crane
+      shell: bash
+      env:
+        OS: Linux
+        ARCH: x86_64
+        VERSION: ${{ steps.which.outputs.version }}
+
+    - name: 'Check binary'
+      run: ${{ runner.temp }}/crane
+      shell: bash
+
+    - name: 'Export Path'
+      id: crane
+      run: echo "the-path=${{ runner.temp }}/crane" >> $GITHUB_OUTPUT
+      shell: bash

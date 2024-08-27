@@ -15,7 +15,7 @@ runs:
     - name: 'Check Which Version we should use'
       id: which
       run: |
-        if [[ "x${{}}" = "xlatest" ]]; then
+        if [[ "x${{inputs.version}}" = "xlatest" ]]; then
           export latestVersion=$(gh release list --repo google/go-containerregistry --limit 1 --json name --jq '.[].name')
         else
           export latestVersion=${{ inputs.version }}

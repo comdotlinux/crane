@@ -16,7 +16,7 @@ runs:
       id: which
       run: |
         if [[ "x${{inputs.version}}" = "xlatest" ]]; then
-          export latestVersion=$(gh release list --repo google/go-containerregistry --limit 1 --json name --jq '.[].name')
+          export latestVersion=$(curl -s "https://api.github.com/repos/google/go-containerregistry/releases/latest" | jq -r '.tag_name')
         else
           export latestVersion=${{ inputs.version }}
         fi

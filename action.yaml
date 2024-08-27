@@ -26,8 +26,9 @@ runs:
     - name: 'Download go-containerregistry'
       run: |
         curl -sL "https://github.com/google/go-containerregistry/releases/download/${VERSION}/go-containerregistry_${OS}_${ARCH}.tar.gz" > go-containerregistry.tar.gz
-        tar -zxvf go-containerregistry.tar.gz -C ${{ runner.temp }}/crane
-        chmod u+x ${{ runner.temp }}/crane
+        mkdir ${{ runner.temp }}/crane
+        tar -zxvf go-containerregistry.tar.gz -C ${{ runner.temp }}/crane/crane
+        chmod u+x ${{ runner.temp }}/crane/crane
       shell: bash
       env:
         OS: Linux
@@ -35,10 +36,10 @@ runs:
         VERSION: ${{ steps.which.outputs.version }}
 
     - name: 'Check binary'
-      run: ${{ runner.temp }}/crane
+      run: ${{ runner.temp }}/crane/crane
       shell: bash
 
     - name: 'Export Path'
       id: crane
-      run: echo "the-path=${{ runner.temp }}/crane" >> $GITHUB_OUTPUT
+      run: echo "the-path=${{ runner.temp }}/crane/crane" >> $GITHUB_OUTPUT
       shell: bash

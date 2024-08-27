@@ -1,4 +1,7 @@
-on: [push]
+on: 
+  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   test_job:

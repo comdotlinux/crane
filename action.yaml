@@ -29,7 +29,8 @@ runs:
         export archiveUrl="https://github.com/google/go-containerregistry/releases/download/${{ env.VERSION }}/go-containerregistry_${{ env.OS }}_${{ env.ARCH }}.tar.gz"
         echo "Downloading $archiveUrl"
         curl -sL "$archiveUrl" > go-containerregistry.tar.gz
-        mkdir ${{ runner.temp }}/crane
+        mkdir -pv ${{ runner.temp }}/crane
+        chmod -Rc 777 ${{ runner.temp }}/crane
         tar -zxvf go-containerregistry.tar.gz -C ${{ runner.temp }}/crane/crane
         chmod u+x ${{ runner.temp }}/crane/crane
       shell: bash

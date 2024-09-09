@@ -16,4 +16,4 @@ jobs:
       - run: ${{ env.CRANE }} --help
         shell: bash
         env:
-          CRANE: ${{ steps.fcrane-setup.outputs.crane }}
+          CRANE: ${{ steps.crane-setup.outputs.crane }}

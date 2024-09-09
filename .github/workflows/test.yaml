@@ -13,7 +13,7 @@ jobs:
         uses: comdotlinux/crane@v0.0.7
         with:
           version: 'latest'
-      - run: $CRANE --help
+      - run: ${{ env.CRANE }} --help
         shell: bash
         env:
           CRANE: ${{ steps.fcrane-setup.outputs.crane }}

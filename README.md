@@ -1,6 +1,17 @@
 # crane
 A Composite Github Action that eases the usage of google/go-containerregistry in your project
 
+### How?
+- See the sample [test.yaml](.github/workflows/test.yaml) on usage.
+- Basically 
+```yaml
+      - id: crane-setup
+        uses: comdotlinux/crane@v1
+      - run: $CRANE
+        env:
+          CRANE: ${{ steps.crane-setup.outputs.crane-path }}
+```
+
 ### What
 - https://github.com/google/go-containerregistry has some interesting things to use (See Readme for usage)
 - After using this action you should have a crane command available for you to use installed for that github workflow.

@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: crane-setup
-        uses: comdotlinux/crane@v1
+        uses: comdotlinux/crane@v1.0.0
         with:
           version: 'latest'
       - run: $CRANE --help

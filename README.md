@@ -6,7 +6,7 @@ A Composite Github Action that eases the usage of google/go-containerregistry in
 - Basically 
 ```yaml
       - id: crane-setup
-        uses: comdotlinux/crane@v1
+        uses: comdotlinux/crane@v1.0.0
       - run: $CRANE
         env:
           CRANE: ${{ steps.crane-setup.outputs.crane-path }}

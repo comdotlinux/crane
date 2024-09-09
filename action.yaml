@@ -1,5 +1,5 @@
-name: 'Setup Crane'
-description: 'Setup go-containerregistry either from cache or by downloading'
+name: 'Crane Setup'
+description: 'Setup go-containerregistry either from cache or by downloading but without installing go'
 inputs:
   version:
     description: 'Which version to install / set-up'

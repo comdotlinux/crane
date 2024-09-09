@@ -30,8 +30,7 @@ runs:
         echo "Downloading $archiveUrl"
         curl -sL "$archiveUrl" > go-containerregistry.tar.gz
         mkdir -pv ${{ runner.temp }}/crane
-        chmod -Rc 777 ${{ runner.temp }}/crane
-        tar -zxvf go-containerregistry.tar.gz -C ${{ runner.temp }}/crane/crane
+        tar -zxvf go-containerregistry.tar.gz -C ${{ runner.temp }}/crane/
         chmod u+x ${{ runner.temp }}/crane/crane
       shell: bash
       env:

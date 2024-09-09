@@ -20,12 +20,15 @@ runs:
         else
           export latestVersion=${{ inputs.version }}
         fi
+        echo "selected version $latestVersion"
         echo "version=$latestVersion" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: 'Download go-containerregistry'
       run: |
-        curl -sL "https://github.com/google/go-containerregistry/releases/download/${VERSION}/go-containerregistry_${OS}_${ARCH}.tar.gz" > go-containerregistry.tar.gz
+        export archiveUrl="https://github.com/google/go-containerregistry/releases/download/${{ env.VERSION }}/go-containerregistry_${{ env.OS }}_${{ env.ARCH }}.tar.gz"
+        echo "Downloading $archiveUrl"
+        curl -sL "$archiveUrl" > go-containerregistry.tar.gz
         mkdir ${{ runner.temp }}/crane
         tar -zxvf go-containerregistry.tar.gz -C ${{ runner.temp }}/crane/crane
         chmod u+x ${{ runner.temp }}/crane/crane
